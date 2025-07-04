@@ -33,7 +33,9 @@ class Admin {
 
         wp_enqueue_style(
             'avd-css',
-            AVD_URL . 'assets/css/dashboard.css'
+            AVD_URL . 'assets/css/dashboard.css',
+            [],
+            AVD_VER
         );
 
         wp_enqueue_script(
@@ -48,7 +50,7 @@ class Admin {
             'avd-js',
             AVD_URL . 'assets/js/dashboard.js',
             [ 'chartjs' ],
-            null,
+            AVD_VER,
             true
         );
     }

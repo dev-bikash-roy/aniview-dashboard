@@ -10,5 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 define( 'AVD_PATH', plugin_dir_path( __FILE__ ) );
 define( 'AVD_URL',  plugin_dir_url( __FILE__ ) );
+define( 'AVD_VER', '0.1.0' );
 
 require_once AVD_PATH . 'admin/class-av-admin.php';
+register_activation_hook( __FILE__, function() {} );
