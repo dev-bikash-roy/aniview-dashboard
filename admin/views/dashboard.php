@@ -1,3 +1,1 @@
-<div id="avd-app">
-    <p>Loading dashboard…</p>
-</div>
+<div id="avd-app"></div>
