@@ -14,6 +14,11 @@ define( 'AVD_VER',  '0.1.0' );
 
 require_once AVD_PATH . 'admin/class-av-admin.php';
 require_once AVD_PATH . 'includes/class-av-rest.php';
+require_once AVD_PATH . 'includes/class-av-ingest.php';
 
-// Nothing yet on activation but you can hook table creation here
-register_activation_hook( __FILE__, function () {} );
+register_activation_hook( __FILE__, function () {
+    \AVD\Ingest::install();
+    \AVD\Ingest::schedule();
+} );
+
+\AVD\Ingest::init();
