@@ -49,15 +49,10 @@ class Admin {
         wp_enqueue_script(
             'avd-js',
             AVD_URL . 'assets/js/dashboard.js',
-            [ 'chartjs', 'wp-element', 'wp-api' ],
+            [ 'chartjs' ],
             AVD_VER,
             true
         );
-
-        wp_localize_script( 'avd-js', 'avdData', [
-            'root'  => esc_url_raw( rest_url( 'av/v1/' ) ),
-            'nonce' => wp_create_nonce( 'wp_rest' ),
-        ] );
     }
 }
 
