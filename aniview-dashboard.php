@@ -15,5 +15,23 @@ define( 'AVD_VER',  '0.1.0' );
 require_once AVD_PATH . 'admin/class-av-admin.php';
 require_once AVD_PATH . 'includes/class-av-rest.php';
 
-// Nothing yet on activation but you can hook table creation here
-register_activation_hook( __FILE__, function () {} );
+register_activation_hook( __FILE__, 'avd_activate' );
+
+function avd_activate() {
+    global $wpdb;
+    $table_name      = $wpdb->prefix . 'av_datasources';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    dbDelta("CREATE TABLE {$table_name} (
+        id bigint(20) unsigned NOT NULL auto_increment,
+        name varchar(191) NOT NULL,
+        type varchar(50) NOT NULL,
+        config longtext NULL,
+        is_active tinyint(1) NOT NULL default 1,
+        last_run datetime NULL,
+        created datetime NOT NULL default CURRENT_TIMESTAMP,
+        PRIMARY KEY  (id)
+    ) {$charset_collate};");
+}
