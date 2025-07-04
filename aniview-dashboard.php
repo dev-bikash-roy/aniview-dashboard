@@ -14,9 +14,18 @@ define( 'AVD_VER',  '0.1.0' );
 
 require_once AVD_PATH . 'admin/class-av-admin.php';
 require_once AVD_PATH . 'includes/class-av-rest.php';
+require_once AVD_PATH . 'includes/class-av-ingest.php';
 
-register_activation_hook( __FILE__, 'avd_activate' );
+// ✅ Merge both activation flows
+register_activation_hook( __FILE__, function () {
+    avd_activate();
+    \AVD\Ingest::install();
+    \AVD\Ingest::schedule();
+});
 
+\AVD\Ingest::init();
+
+// ✅ Keep the datasource table creation logic
 function avd_activate() {
     global $wpdb;
     $table_name      = $wpdb->prefix . 'av_datasources';
