@@ -18,11 +18,30 @@ class Admin {
             'dashicons-chart-area',
             80
         );
+
+        add_submenu_page(
+            'avd-dashboard',
+            'Data Sources',
+            'Data Sources',
+            'manage_options',
+            'avd-datasources',
+            [ __CLASS__, 'data_sources_page' ]
+        );
     }
 
     public static function dashboard_page() {
         echo '<div class="wrap"><h1>AV Dashboard</h1>';
         include AVD_PATH . 'admin/views/dashboard.php';
+        echo '</div>';
+    }
+
+    public static function data_sources_page() {
+        global $wpdb;
+        $table   = $wpdb->prefix . 'av_datasources';
+        $sources = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY id DESC" );
+
+        echo '<div class="wrap"><h1>Data Sources</h1>';
+        include AVD_PATH . 'admin/views/data-sources.php';
         echo '</div>';
     }
 
