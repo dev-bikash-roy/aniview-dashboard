@@ -33,9 +33,7 @@ class Admin {
 
         wp_enqueue_style(
             'avd-css',
-            AVD_URL . 'assets/css/dashboard.css',
-            [],
-            AVD_VER
+            AVD_URL . 'assets/css/dashboard.css'
         );
 
         wp_enqueue_script(
@@ -49,15 +47,10 @@ class Admin {
         wp_enqueue_script(
             'avd-js',
             AVD_URL . 'assets/js/dashboard.js',
-            [ 'chartjs', 'wp-element', 'wp-api' ],
-            AVD_VER,
+            [ 'chartjs' ],
+            null,
             true
         );
-
-        wp_localize_script( 'avd-js', 'avdData', [
-            'root'  => esc_url_raw( rest_url( 'av/v1/' ) ),
-            'nonce' => wp_create_nonce( 'wp_rest' ),
-        ] );
     }
 }
 
